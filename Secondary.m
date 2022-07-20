@@ -1,6 +1,6 @@
 %% Settings
-%wire_dia = 0.8128; %mm 20 awg
-wire_dia = 0.6426; %mm 22 awg
+wire_dia = 0.8128; %mm 20 awg
+%wire_dia = 0.6426; %mm 22 awg
 %wire_dia = 0.5106; %mm 24 awg
 insulation_thickness = 0.022+0.80;
 coil_dia = 5; %in
@@ -31,7 +31,7 @@ function Q = getQ(freq, inductance, Rac)
     Q = 2*pi*freq * inductance / Rac;
 end
 
-function [Rac,Rdc]= getRac(wire_dia, insulation_thickness, coil_dia, turns, resonance_freq)
+function [Rac, Rdc]= getRac(wire_dia, insulation_thickness, coil_dia, turns, resonance_freq)
     %% Constants
     copper_conductivity = 58.7e6; %Siemens/m
     in2m = 0.0254; %m/in
@@ -41,7 +41,6 @@ function [Rac,Rdc]= getRac(wire_dia, insulation_thickness, coil_dia, turns, reso
     wire_area = (wire_dia/2*1e-3)^2*pi; %m^2
 
     Rdc = wire_length / (wire_area*copper_conductivity); %Ω
-    skin_depth = getSkinDepth(resonance_freq,copper_conductivity);
     %% Prox effect Math https://en.wikipedia.org/wiki/Proximity_effect_(electromagnetism) 
     center_center = (wire_dia+insulation_thickness);
     w = resonance_freq * 2 * pi;
